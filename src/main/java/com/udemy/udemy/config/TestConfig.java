@@ -3,16 +3,12 @@ package com.udemy.udemy.config;
 import java.time.Instant;
 import java.util.Arrays;
 
+import com.udemy.udemy.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.udemy.udemy.entities.Category;
-import com.udemy.udemy.entities.Order;
-import com.udemy.udemy.entities.OrderItem;
-import com.udemy.udemy.entities.Product;
-import com.udemy.udemy.entities.User;
 import com.udemy.udemy.entities.enums.OrderStatus;
 import com.udemy.udemy.repositories.CategoryRepository;
 import com.udemy.udemy.repositories.OrderItemRepository;
@@ -80,5 +76,11 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
+
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		o1.setPayment(pay1);
+
+		orderRepository.save(o1);
 	}
 }
